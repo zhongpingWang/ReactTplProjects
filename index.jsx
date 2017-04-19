@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware,compose,bindActionCreators } from 'redux';
 import { Provider,connect } from 'react-redux';
 import thunk from 'redux-thunk';
+import { Router, Route, browserHistory,Link,IndexRoute,hashHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
  
 
 import './less/index'
@@ -17,37 +19,30 @@ const finalCreateStore = compose(
 const store = finalCreateStore(AppReducer);   
 
 
-import * as AppactionCreators from './actions/appAction';
 
-let AppComponent = React.createClass({ 
-
-	componentWillMount(){ 
-		this.props.AppActions.fetchData();
-	},
-	 
-	render(){
-
-		let loading=(<div>loading</div>),
-			users=this.props.AppReducer.data.map((item)=>{ 
-				return (<div key={item.id}>{item.name}</div>);
-			}),
-			isLoading=this.props.AppReducer.loading; 
-	   
-	    return ( 
-	    	<div id="app" className="app">
-	        	 Empty React Project! <span className="reLoad" onClick={()=>{this.props.AppActions.fetchData();}}>刷新</span>
-	        	 {isLoading && loading || users}
-	       </div>
-	    );
-	}
-
-}); 
+import App from './Components/App'
+import A from './components/A'
+import B from './components/B'
+import C from './components/C'
+import NoMatch from './components/NoMatch'
  
-function mapDispatchToProps(dispatch) {
-  return{ AppActions: bindActionCreators(AppactionCreators, dispatch)}
-}
  
-let App = connect(state => state,mapDispatchToProps)(AppComponent)
+const history = syncHistoryWithStore(hashHistory, store)
+
+ReactDOM.render(
+  <Provider store={store}> 
+    <Router history={history}> 
+      <Route path="/" component={App}>
+      <IndexRoute component={A}/>
+        <Route path="A" component={A}/>
+        <Route path="B" component={B}/>
+        <Route path="C" component={C}/> 
+        <Route path="*" component={NoMatch}/>
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById('app')
+);
 
 
-ReactDOM.render(<Provider store={store}><App /></Provider>,document.getElementById("app"));
+ 
