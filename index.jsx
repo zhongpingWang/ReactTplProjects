@@ -1,49 +1,53 @@
 //npm
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'; 
+import { createStore, applyMiddleware,compose,bindActionCreators } from 'redux';
+import { Provider,connect } from 'react-redux';
+import thunk from 'redux-thunk';
+ 
+
 import './less/index'
 
+import AppReducer from './redux/index' 
+//store
+const finalCreateStore = compose(
+  applyMiddleware(thunk)
+)(createStore);
+
+const store = finalCreateStore(AppReducer);   
 
 
-let App = React.createClass({
+import * as AppactionCreators from './actions/appAction';
 
-	// getDefaultProps(){
-	// 	return{
-	// 		def:null
-	// 	}
-	// },
+let AppComponent = React.createClass({ 
 
-	// getInitialState() { 
-	// 	return {
-	// 		loading:true
-	// 	} 
-	// }, 
+	componentWillMount(){ 
+		this.props.AppActions.fetchData();
+	},
+	 
+	render(){
 
-	//componentWillMount(){},
-
-	//componentDidMount(){},
-
-	//componentWillReceiveProps(){},
-
-	//shouldComponentUpdate(){},
-
-	//componentWillUpdate(){},
-
-	//componentDidUpdate(){},
-
-	//componentWillUnmount(){},
-
-	render(){ 
-	  
+		let loading=(<div>loading</div>),
+			users=this.props.AppReducer.data.map((item)=>{ 
+				return (<div key={item.id}>{item.name}</div>);
+			}),
+			isLoading=this.props.AppReducer.loading; 
+	   
 	    return ( 
 	    	<div id="app" className="app">
-	        	 Empty React Project!
+	        	 Empty React Project! <span className="reLoad" onClick={()=>{this.props.AppActions.fetchData();}}>刷新</span>
+	        	 {isLoading && loading || users}
 	       </div>
 	    );
 	}
 
-});
+}); 
+ 
+function mapDispatchToProps(dispatch) {
+  return{ AppActions: bindActionCreators(AppactionCreators, dispatch)}
+}
+ 
+let App = connect(state => state,mapDispatchToProps)(AppComponent)
 
 
-
-ReactDOM.render(<App />,document.getElementById("app"));
+ReactDOM.render(<Provider store={store}><App /></Provider>,document.getElementById("app"));
