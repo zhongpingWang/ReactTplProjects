@@ -1,0 +1,54 @@
+{
+  "name": "ReactEmptyProject",
+  "version": "1.0.0",
+  "description": "一个空的React模板",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": { 
+    "build":"webpack",
+     "start":"webpack-dev-server -w"
+  },
+  "keywords": [
+    "webpack",
+    "react",
+    "es6",
+    "babel",
+    "redux",
+    "boilerplate"
+  ],
+  "author": "Zp",
+  "license": "MIT", 
+  "dependencies": { 
+    "babel-cli": "~6.14.0",
+    "babel-core": "~6.10.4",
+    "babel-loader": "~6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "~6.8.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "~6.9.0",
+    "babel-preset-react": "~6.11.1",
+    "babel-preset-stage-0": "^6.22.0", 
+    "copy-webpack-plugin": "~3.0.1",
+    "css-loader": "~0.23.1", 
+    "extract-text-webpack-plugin": "~1.0.1", 
+    "html-webpack-plugin": "~2.22.0",
+    "image-webpack-loader": "~2.0.0", 
+    "less": "~2.6.0",
+    "less-loader": "~2.2.2", 
+    "react": "15.3.2",
+    "react-addons": "~0.9.1-deprecated",
+    "react-addons-linked-state-mixin": "^15.4.2",
+    "react-addons-pure-render-mixin": "~15.3.2",
+    "react-addons-test-utils": "~15.3.2",
+    "react-addons-transition-group": "~15.3.2",
+    "react-addons-update": "^15.4.2",
+    "react-dom": "~15.2.1", 
+    "style-loader": "~0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "~1.13.1",
+    "webpack-dev-server": "~1.14.1",
+    "webpack-md5-hash": "0.0.5"
+  }
+}
