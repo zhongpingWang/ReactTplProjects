@@ -1,48 +1,24 @@
-//npm
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom'; 
-import { createStore, applyMiddleware,compose,bindActionCreators } from 'redux';
-import { Provider,connect } from 'react-redux';
-import thunk from 'redux-thunk';
-import { Router, Route, browserHistory,Link,IndexRoute,hashHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+/*eslint-disable no-unused-vars*/
+import "babel-polyfill" 
+import React from 'react'
+import { render } from 'react-dom' 
+import Root from './containers/root/index';  
+import configureStore from './reduxConfig/configureStore';
+import rootSaga from './sagas/index'
+import { hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+
+
+let store = configureStore(); 
  
-
-import './less/index'
-
-import AppReducer from './redux/index' 
-//store
-const finalCreateStore = compose(
-  applyMiddleware(thunk)
-)(createStore);
-
-const store = finalCreateStore(AppReducer);   
-
-
-
-import App from './Components/App'
-import A from './components/A'
-import B from './components/B'
-import C from './components/C'
-import NoMatch from './components/NoMatch'
+const history = syncHistoryWithStore(hashHistory, store,{
+  selectLocationState (state) {   
+      return state.get("routing");//state.get('routing')//.toJS();
+  }
+});  
  
- 
-const history = syncHistoryWithStore(hashHistory, store)
+store.runSaga(rootSaga); 
 
-ReactDOM.render(
-  <Provider store={store}> 
-    <Router history={history}> 
-      <Route path="/" component={App}>
-      <IndexRoute component={A}/>
-        <Route path="A" component={A}/>
-        <Route path="B" component={B}/>
-        <Route path="C" component={C}/> 
-        <Route path="*" component={NoMatch}/>
-      </Route>
-    </Router>
-  </Provider>,
-  document.getElementById('app')
-);
-
-
- 
+render(
+ <Root store={ store } history={history} />,
+  document.getElementById('app'));

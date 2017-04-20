@@ -47,8 +47,8 @@ var Config= {
 
   module: {
     loaders: [
-      {test: /\.jsx$/,loader: 'babel', query: {presets: ['es2015',"stage-0",'react']},exclude: [nodeModulesPath]},
-      {test: /\.js$/,loader: 'babel', query: {presets: ['es2015',"stage-0"]},exclude: [nodeModulesPath]},
+     {test: /\.jsx$/,loader: 'babel', query: {presets: ['es2015',"stage-0",'react'], "plugins": ["transform-decorators-legacy"]},exclude: [nodeModulesPath]},
+      {test: /\.js$/,loader: 'babel', query: {presets: ['es2015',"stage-0",'react']},exclude: [nodeModulesPath]},
       {test: /\.less$/,loader: ExtractTextPlugin.extract('style', 'css!less')}, 
       {test: /\.(png|jpg|gif)$/,loader: 'url?limit=2048&name=imgs/[name]_[hash:4].[ext]'}  
     ]

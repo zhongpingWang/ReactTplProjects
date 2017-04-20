@@ -3,6 +3,8 @@ import {  Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as AppactionCreators from '../actions/appAction'
+
+import '../less/index'
  
 
 class App extends Component {
@@ -29,4 +31,6 @@ function mapDispatchToProps(dispatch) {
   return{ AppActions: bindActionCreators(AppactionCreators, dispatch)}
 } 
 
-export default connect(state => state,mapDispatchToProps)(App)
+//export default connect(state => state,mapDispatchToProps)(App)
+
+export default App

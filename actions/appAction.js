@@ -2,21 +2,9 @@
 import * as ActionType from './actionType' 
  
 //页面加载
-export function fetchData(params){ 
+export function fetchData(){ 
 
-	return (dispatch)=>{ 
-		//发起请求
-		dispatch({
+	 return {
 			type:ActionType.REQUEST
-		}); 
-	 
-		setTimeout(()=>{
-
-			dispatch({
-				type:ActionType.SUCCESS,
-				data:[{name:"小明",id:1},{name:"小红",id:2}]
-			});
-
-		},2000);
-	} 
+		}
 } 

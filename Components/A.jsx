@@ -1,18 +1,16 @@
-import React,{Component} from 'react' 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import * as AppactionCreators from '../actions/appAction'
+import React,{Component} from 'react'  
+import AList from './AList'
 
-class A extends Component {
-  render() {
-  	console.log(this.props)
-    return (  <div>A</div> )
+
+export default class A extends Component {
+
+	componentWillMount() { 
+		this.props.AppActions.fetchData();
+	}
+
+  render() { 
+    return (  <div>A <AList {...this.props}/></div> )
   }
-}
-
-
-function mapDispatchToProps(dispatch) {
-  return{ AppActions: bindActionCreators(AppactionCreators, dispatch)}
 } 
 
-export default connect(state => state,mapDispatchToProps)(A)
+ 
