@@ -1,13 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import {  Link } from 'react-router' 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import * as AppactionCreators from '../actions/appAction'
-
-import '../less/index'
- 
+import DevTools from '../devTools/DevTools';  
 
 class App extends Component {
+  
   render() {
   
     return (
@@ -20,17 +16,10 @@ class App extends Component {
               </ul> 
           </div>
           <div id="bodyContent">{this.props.children}</div>
+         {/* <DevTools /> */}
       </div>
     )
   }
-} 
- 
-
-
-function mapDispatchToProps(dispatch) {
-  return{ AppActions: bindActionCreators(AppactionCreators, dispatch)}
-} 
-
-//export default connect(state => state,mapDispatchToProps)(App)
+}   
 
 export default App

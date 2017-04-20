@@ -9,10 +9,10 @@ export default {
 	},
 
 	URL: {   
-		gitHubApi:"json/w.json"
+		gitw:"json/w.json"
 	},
 
 	DEBUGURL:{
-		 test:"src/pages/model/mock/test.json"	 
+		 gitw:"json/w.json" 
 	}
 } 
